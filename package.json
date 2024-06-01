@@ -8,12 +8,14 @@
     "devDependencies": {
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0",
+        "sass": "^1.77.4",
         "vite": "^5.0"
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.1.0",
         "@mdi/font": "^7.4.47",
         "@vitejs/plugin-vue": "^5.0.4",
+        "pinia": "^2.1.7",
         "vue": "^3.4.27",
         "vuetify": "^3.6.7"
     }
