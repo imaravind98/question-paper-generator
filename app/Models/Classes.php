@@ -8,21 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 
 use Laravel\Scout\Searchable;
 
-class Chapter extends Model
+class Classes extends Model
 {
     use HasFactory, HasTimestamps, Searchable;
 
     protected $fillable = [
         'name',
-        'subject_id',
         'created_by',
         'updated_by'
     ];
 
     /**
-     * Convert the Chapter model instance to an array that can be indexed by a search engine.
+     * Convert the Class model instance to an array that can be indexed by a search engine.
      *
-     * @return array The array representation of the Chapter model for search indexing.
+     * @return array The array representation of the Class model for search indexing.
      */
     public function toSearchableArray(): array
     {

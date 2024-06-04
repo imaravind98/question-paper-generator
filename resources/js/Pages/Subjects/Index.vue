@@ -3,30 +3,30 @@
 import { VDataTableServer, VDivider, VIcon, VTextField } from 'vuetify/components';
 import { VTooltip } from 'vuetify/components';
 import { VBtn } from 'vuetify/components';
-import { useChapterStore } from '../../Stores/chapterStore';
+import { useSubjectStore } from '../../Stores/subjectStore';
 import { defineProps, onMounted, ref, watch } from 'vue';
-import AddEditDialog from '../../Components/Chapter/AddEditDialog.vue'
+import AddEditDialog from '../../Components/Subject/AddEditDialog.vue'
 import DeleteDialog from '../../Components/Global/dialogBoxes/DeleteDialog.vue'
 import { Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps(
     {
-        chapterList: {
+        subjectList: {
             type: Object
         },
     }
 )
 
-const store = useChapterStore()
+const store = useSubjectStore()
 
 onMounted(async function(){
     store.reset()
-    await store.setChapterList(props.chapterList)
+    await store.setSubjectList(props.subjectList)
 })
 
 watch(props, async function(newProps, oldProps){
-    store.setChapterList(newProps.chapterList)
+    store.setSubjectList(newProps.subjectList)
 })
 
 const headers = [
@@ -43,12 +43,12 @@ const create = () => {
 }
 
 const remove = (item) => {
-    store.setChapter(item)
+    store.setSubject(item)
     deleteDialogShow.value = true
 }
 
 const edit = (item) => {
-    store.setChapter(item)
+    store.setSubject(item)
     addEditDialogShow.value = true
 }
 
@@ -59,23 +59,23 @@ const size = ref(urlParams.get('size')?? 10)
 const searchTerm = ref(urlParams.get('search')?? '')
 
 watch(searchTerm, async function(newSearchTerm, oldSearchTerm){
-    router.get('chapters', { size: size.value, page: page.value, search: newSearchTerm }, { only: ['chapterList'], preserveState: true })
+    router.get('subjects', { size: size.value, page: page.value, search: newSearchTerm }, { only: ['subjectList'], preserveState: true })
 })
 
 const changePage = (pageNumber) => {
     page.value = pageNumber
-    router.get('chapters', { size: size.value, page: page.value }, { only: ['chapterList'] })
+    router.get('subjects', { size: size.value, page: page.value }, { only: ['subjectList'] })
 }
 
 const changePageSize = (pageSize) => {
     size.value = pageSize
-    router.get('chapters', { size: size.value, page: page.value }, { only: ['chapterList'] })
+    router.get('subjects', { size: size.value, page: page.value }, { only: ['subjectList'] })
 }
 
 
 </script>
 <template>
-    <VCard title="Chapters">
+    <VCard title="Subjects">
         <template #append>
             <div class="d-flex justify-center align-end ga-3">
                 <VTextField 
@@ -94,12 +94,12 @@ const changePageSize = (pageSize) => {
                     height="40"
                     @click="create"
                 >
-                    Add New Chapter
+                    Add New Subject
                     <VTooltip
                         activator="parent"
                         location="top"
                     >
-                        Create new Chapters
+                        Create new Subjects
                     </VTooltip>
                 </VBtn>
             </div>
@@ -107,10 +107,10 @@ const changePageSize = (pageSize) => {
         <VDivider />
         <VDataTableServer
             :headers="headers"
-            :items="store.chapterList.data"
-            :items-per-page="store.chapterList.per_page"
-            :items-length="store.chapterList.total"
-            :page="store.chapterList.current_page"
+            :items="store.subjectList.data"
+            :items-per-page="store.subjectList.per_page"
+            :items-length="store.subjectList.total"
+            :page="store.subjectList.current_page"
             fixed-header
             first-icon="mdi-skip-backward-outline"
             last-icon="mdi-skip-forward-outline"
@@ -121,7 +121,7 @@ const changePageSize = (pageSize) => {
         >
         <template #item.action="{item}">
             <div class="d-flex ga-2">
-                <Link :href="`/chapters/${item.id}`" style="color:unset">
+                <Link :href="`/subjects/${item.id}`" style="color:unset">
                     <v-btn variant="flat">
                         <VIcon icon="mdi-eye-outline" />
                         <VTooltip

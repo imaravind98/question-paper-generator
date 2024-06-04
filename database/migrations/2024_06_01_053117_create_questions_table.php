@@ -17,8 +17,9 @@ return new class extends Migration
             $table->text('type');
             $table->text('option');
             $table->bigInteger('mark');
-            $table->text('class_ids');
-            $table->text('chapter_ids');
+            $table->text('class_id');
+            $table->text('subject_id');
+            $table->text('chapter_id');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question');
+        Schema::dropIfExists('questions');
     }
 };

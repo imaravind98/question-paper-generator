@@ -2,59 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ChapterRepository;
 use App\Repositories\ClassRepository;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
-class ChapterController extends Controller
+class ClassController extends Controller
 {
-    protected $chapterRepository;
-    
     protected $classRepository;
 
     /**
      * Constructor to bind repository to controller.
      *
-     * @param ChapterRepository $chapterRepository
+     * @param ClassRepository $classRepository
      */
-    public function __construct(ChapterRepository $chapterRepository, ClassRepository $classRepository)
+    public function __construct(ClassRepository $classRepository)
     {
-        $this->chapterRepository = $chapterRepository;
         $this->classRepository = $classRepository;
     }
 
     /**
-     * Display a listing of the chapters.
+     * Display a listing of the classes.
      *
      * @return \Inertia\Response
      */
     public function index(Request $request)
     {
-        $chapterList = $this->chapterRepository->list($request['size']);
+        $classList = $this->classRepository->list($request['size']);
         if ($request['search']) {
-            $chapterList = $this->chapterRepository->search($request['search'], $request['size']);
+            $classList = $this->classRepository->search($request['search'], $request['size']);
         }
-
-        $classes = $this->classRepository->all();
-        return Inertia::render('Chapters/Index', [
-            'chapterList' => $chapterList,
-            'classes' => $classes,
-        ]);
+        return Inertia::render('Classes/Index', ['classList' => $classList]);
     }
 
     /**
-     * Show the form for creating a new chapter.
+     * Show the form for creating a new class.
      *
      * @return \Inertia\Response
      */
     public function create()
     {
-        return Inertia::render('Chapters/Create');
+        return Inertia::render('Classes/Create');
     }
 
     /**
-     * Store a newly created chapter in storage.
+     * Store a newly created class in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -65,37 +56,37 @@ class ChapterController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $this->chapterRepository->create($data);
+        $this->classRepository->create($data);
 
         return true;
     }
 
     /**
-     * Display the specified chapter.
+     * Display the specified class.
      *
      * @param int $id
      * @return \Inertia\Response
      */
     public function show($id)
     {
-        $chapter = $this->chapterRepository->find($id);
-        return Inertia::render('Chapters/Show', ['chapter' => $chapter]);
+        $class = $this->classRepository->find($id);
+        return Inertia::render('Classes/Show', ['classData' => $class]);
     }
 
     /**
-     * Show the form for editing the specified chapter.
+     * Show the form for editing the specified class.
      *
      * @param int $id
      * @return \Inertia\Response
      */
     public function edit($id)
     {
-        $chapter = $this->chapterRepository->find($id);
-        return Inertia::render('Chapters/Edit', ['chapter' => $chapter]);
+        $class = $this->classRepository->find($id);
+        return Inertia::render('Classes/Edit', ['classData' => $class]);
     }
 
     /**
-     * Update the specified chapter in storage.
+     * Update the specified class in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
@@ -107,20 +98,20 @@ class ChapterController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $this->chapterRepository->update($id, $data);
+        $this->classRepository->update($id, $data);
 
         return true;
     }
 
     /**
-     * Remove the specified chapter from storage.
+     * Remove the specified class from storage.
      *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $this->chapterRepository->delete($id);
+        $this->classRepository->delete($id);
 
         return true;
     }
