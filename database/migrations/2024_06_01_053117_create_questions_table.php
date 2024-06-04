@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('question');
             $table->text('type');
-            $table->text('option');
+            $table->text('option')->nullable();
             $table->bigInteger('mark');
             $table->text('class_id');
             $table->text('subject_id');

@@ -1,4 +1,4 @@
-export const myCustomLightTheme = {
+export const customTheme = {
     dark: false,
     colors: {
       background: '#FFFFFF',
@@ -21,7 +21,7 @@ export const myCustomLightTheme = {
       'border-opacity': 0.12,
       'high-emphasis-opacity': 0.87,
       'medium-emphasis-opacity': 0.60,
-      'disabled-opacity': 0.38,
+      'disabled-opacity': 0.8,
       'idle-opacity': 0.04,
       'hover-opacity': 0.04,
       'focus-opacity': 0.12,

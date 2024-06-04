@@ -5,16 +5,16 @@ import { mdi } from 'vuetify/iconsets/mdi';
 import { aliases, fa } from 'vuetify/iconsets/fa'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
-import { myCustomLightTheme } from './theme';
+import { customTheme } from './theme';
 
 export const vuetify = createVuetify({
     components,
     directives,
     ssr: true,
     theme: {
-      defaultTheme: 'myCustomLightTheme',
+      defaultTheme: 'light',
       themes: {
-        myCustomLightTheme,
+        customTheme,
       },
     },
     icons: {

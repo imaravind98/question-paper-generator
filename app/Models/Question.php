@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Laravel\Scout\Searchable;
 
-class Questions extends Model
+class Question extends Model
 {
     use HasFactory, HasTimestamps, Searchable;
 
@@ -37,7 +37,8 @@ class Questions extends Model
     {
         return [
             "id" => $this->id,
-            "question" => $this->question
+            "question" => $this->question,
+            "type" => $this->type
         ];
     }
 

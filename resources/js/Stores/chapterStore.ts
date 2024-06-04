@@ -1,3 +1,4 @@
+"use strict"
 import axios from "axios";
 import { defineStore } from "pinia";
 import { ref, toRaw } from "vue";
