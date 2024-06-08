@@ -25,7 +25,10 @@ class Question extends Model
     ];
 
     protected $casts = [
-        'option' => 'array'
+        'option' => 'array',
+        'class_id' => 'integer',
+        'subject_id' => 'integer',
+        'chapter_id' => 'integer',
     ];
 
     protected $with = [
