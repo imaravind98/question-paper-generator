@@ -54,15 +54,7 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'question' => 'required|string|max:255',
-            'subject_id' => 'numeric|required',
-            'class_id' => 'numeric|required',
-            'chapter_id' => 'numeric|required',
-            'mark' => 'numeric|required',
-            'type' => 'string|nullable',
-            'option' => 'array|nullable',
-        ]);
+        $data = $request->all();
 
         $this->questionRepository->create($data);
 
@@ -83,15 +75,7 @@ class QuestionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'question' => 'required|string|max:255',
-            'subject_id' => 'numeric|required',
-            'class_id' => 'numeric|required',
-            'chapter_id' => 'numeric|required',
-            'mark' => 'numeric|required',
-            'type' => 'string|nullable',
-            'option' => 'array|nullable',
-        ]);
+        $data = $request->all();
 
         $this->questionRepository->update($id, $data);
 

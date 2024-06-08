@@ -15,6 +15,9 @@ const props = defineProps(
         subjectList: {
             type: Object
         },
+        classes: {
+            type: Object
+        }
     }
 )
 
@@ -31,6 +34,7 @@ watch(props, async function(newProps, oldProps){
 
 const headers = [
     { title: 'Name', key: 'name', sortable: false },
+    { title: 'Class', key: 'classes.name', sortable: false },
     { title: 'Created On', key: 'created_at', width:200, sortable: false },
     { title: 'Action', key: 'action', width:200, sortable: false}
 ]
@@ -154,6 +158,6 @@ const changePageSize = (pageSize) => {
         </template>
         </VDataTableServer>
     </VCard>
-    <AddEditDialog v-model:isDialogVisible="addEditDialogShow" />
+    <AddEditDialog v-model:isDialogVisible="addEditDialogShow" :classes="props.classes" />
     <DeleteDialog v-model:isDialogVisible="deleteDialogShow" />
 </template>

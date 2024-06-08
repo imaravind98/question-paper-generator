@@ -19,6 +19,10 @@ class Chapter extends Model
         'updated_by'
     ];
 
+    protected $with = [
+        'subject'
+    ];
+
     /**
      * Convert the Chapter model instance to an array that can be indexed by a search engine.
      *
@@ -30,5 +34,10 @@ class Chapter extends Model
             "id" => $this->id,
             "name" => $this->name
         ];
+    }
+
+    public function subject ()
+    {
+        return $this->belongsTo(Subject::class);
     }
 }

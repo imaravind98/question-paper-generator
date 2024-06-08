@@ -14,8 +14,13 @@ class Subject extends Model
 
     protected $fillable = [
         'name',
+        'class_id',
         'created_by',
         'updated_by'
+    ];
+
+    protected $with = [
+        'classes'
     ];
 
     /**
@@ -29,5 +34,10 @@ class Subject extends Model
             "id" => $this->id,
             "name" => $this->name
         ];
+    }
+
+    public function classes ()
+    {
+        return $this->belongsTo(Classes::class, 'class_id', 'id');
     }
 }

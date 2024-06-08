@@ -1,9 +1,15 @@
 
 <script setup>
 import { VDialog } from 'vuetify/components';
-import { defineModel } from 'vue'
+import { defineModel, defineProps } from 'vue'
 import { useChapterStore } from '../../Stores/chapterStore';
 import { router } from '@inertiajs/vue3';
+
+const props = defineProps({
+    subjects: {
+        type: Object
+    }
+})
 
 const model = defineModel('isDialogVisible')
 
@@ -59,6 +65,20 @@ const updateModelValue = (event) => {
                             label="Chapter Name"
                             v-model="store.chapter.name"
                             placeholder="Chapter Name"
+                            />
+                        </VCol>
+                        <VCol
+                            cols="12"
+                            md="12"
+                            class="d-flex align-items-center"
+                        >
+                            <VSelect
+                                label="Subjects"
+                                item-value="id"
+                                item-title="name"
+                                :items="props.subjects"
+                                variant="outlined"
+                                v-model="store.chapter.subject_id"
                             />
                         </VCol>
                     </VRow>

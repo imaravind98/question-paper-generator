@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout']);
+Route::get('logout', [AuthController::class, 'logout']);
 Route::middleware('auth')->group(function () {
     Route::resource('chapters', ChapterController::class);
 
@@ -20,5 +20,3 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('questions', QuestionController::class);
 });
-
-

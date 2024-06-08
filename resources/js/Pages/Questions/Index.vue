@@ -1,5 +1,5 @@
 
-<script setup lang="ts">
+<script setup>
 import { VDataTableServer, VDivider, VIcon, VTextField } from 'vuetify/components';
 import { VTooltip } from 'vuetify/components';
 import { VBtn } from 'vuetify/components';
@@ -13,9 +13,6 @@ import { router } from '@inertiajs/vue3';
 const props = defineProps(
     {
         questionList: {
-            type: Object,
-        },
-        questions: {
             type: Object,
         },
         classes: {
@@ -45,6 +42,9 @@ const headers = [
     { title: 'question', key: 'question', sortable: false },
     { title: 'Type', key: 'type', sortable: false },
     { title: 'Mark', key: 'mark', sortable: false },
+    { title: 'Class', key: 'chapter.subject.classes.name', sortable: false },
+    { title: 'Subject', key: 'chapter.subject.name', sortable: false },
+    { title: 'Chapter', key: 'chapter.name', sortable: false },
     { title: 'Created On', key: 'created_at', width:200, sortable: false },
     { title: 'Action', key: 'action', width:200, sortable: false}
 ]

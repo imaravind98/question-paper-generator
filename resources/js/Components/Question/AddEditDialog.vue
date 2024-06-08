@@ -2,7 +2,7 @@
 <script setup>
 "use strict"
 import { VDialog, VTextField, VTextarea } from 'vuetify/components';
-import { defineModel } from 'vue'
+import { computed, defineModel } from 'vue'
 import { useQuestionStore } from '../../Stores/questionStore';
 import { router } from '@inertiajs/vue3';
 import ChooseBestAnswer from './ChooseBestAnswer.vue';
@@ -65,6 +65,22 @@ const quetionType = [
     { title: 'Detail', value: 'detail' },
 ]
 
+
+const subjects = computed(function(){
+    const filteredSubject = props.subjects.filter(function(item){
+        return item.class_id == store.question.class_id
+    })
+
+    return filteredSubject
+})
+
+const chapters = computed(function(){
+    const filteredChapter = props.chapters.filter(function(item){
+        return item.subject_id == store.question.subject_id
+    })
+
+    return filteredChapter
+})
 </script>
 <template>
     <VDialog width="900" :model-value="model" @update:model-value="($event) => { updateModelValue($event) }">
@@ -95,7 +111,7 @@ const quetionType = [
                                 label="Subject"
                                 item-value="id"
                                 item-title="name"
-                                :items="props.subjects"
+                                :items="subjects"
                                 variant="outlined"
                                 v-model="store.question.subject_id"
                             />
@@ -109,7 +125,7 @@ const quetionType = [
                                 label="Chapter"
                                 item-value="id"
                                 item-title="name"
-                                :items="props.chapters"
+                                :items="chapters"
                                 variant="outlined"
                                 v-model="store.question.chapter_id"
                             />

@@ -28,6 +28,10 @@ class Question extends Model
         'option' => 'array'
     ];
 
+    protected $with = [
+        'chapter'
+    ];
+
     /**
      * Convert the Questions model instance to an array that can be indexed by a search engine.
      *

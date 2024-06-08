@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ClassRepository;
 use App\Repositories\SubjectRepository;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -10,14 +11,17 @@ class SubjectController extends Controller
 {
     protected $subJectRepository;
 
+    protected $classRepository;
+
     /**
      * Constructor to bind repository to controller.
      *
      * @param SubjectRepository $subJectRepository
      */
-    public function __construct(SubjectRepository $subJectRepository)
+    public function __construct(SubjectRepository $subJectRepository, ClassRepository $classRepository)
     {
         $this->subJectRepository = $subJectRepository;
+        $this->classRepository = $classRepository;
     }
 
     /**
@@ -34,6 +38,7 @@ class SubjectController extends Controller
 
         return Inertia::render('Subjects/Index', [
             'subjectList' => $SubjectList,
+            'classes' => $this->classRepository->all()
         ]);
     }
 
@@ -55,9 +60,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $data = $request->all();
 
         $this->subJectRepository->create($data);
 
@@ -97,9 +100,7 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $data = $request->all();
 
         $this->subJectRepository->update($id, $data);
 

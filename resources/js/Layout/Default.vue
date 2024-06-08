@@ -1,6 +1,10 @@
 <script setup>
+import { router } from '@inertiajs/vue3';
 import Menu from '../Navigation/Menu.vue';
-import { Link } from '@inertiajs/vue3';
+
+const logout = () => {
+  router.visit('/logout')
+}
 </script>
 <template>
     <v-app id="default">
@@ -18,7 +22,12 @@ import { Link } from '@inertiajs/vue3';
             >
               <VCard class="mb-5">
                 <template #append>
-                  <Link href="logout">Logout</Link>
+                  <VBtn
+                    prepend-icon="mdi-logout"
+                    @click="logout"
+                  >
+                    Logout
+                  </VBtn>
                 </template>
               </VCard>
               <v-card>

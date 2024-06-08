@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ChapterRepository;
-use App\Repositories\ClassRepository;
+use App\Repositories\SubjectRepository;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class ChapterController extends Controller
 {
     protected $chapterRepository;
-    
-    protected $classRepository;
+
+    protected $subjectRepository;
 
     /**
      * Constructor to bind repository to controller.
      *
      * @param ChapterRepository $chapterRepository
      */
-    public function __construct(ChapterRepository $chapterRepository, ClassRepository $classRepository)
+    public function __construct(ChapterRepository $chapterRepository, SubjectRepository $subjectRepository)
     {
         $this->chapterRepository = $chapterRepository;
-        $this->classRepository = $classRepository;
+        $this->subjectRepository = $subjectRepository;
     }
 
     /**
@@ -36,10 +36,9 @@ class ChapterController extends Controller
             $chapterList = $this->chapterRepository->search($request['search'], $request['size']);
         }
 
-        $classes = $this->classRepository->all();
         return Inertia::render('Chapters/Index', [
             'chapterList' => $chapterList,
-            'classes' => $classes,
+            'subjects' => $this->subjectRepository->all()
         ]);
     }
 
@@ -61,9 +60,7 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $data = $request->all();
 
         $this->chapterRepository->create($data);
 
@@ -103,9 +100,7 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $data = $request->all();
 
         $this->chapterRepository->update($id, $data);
 
