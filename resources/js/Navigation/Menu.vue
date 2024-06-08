@@ -9,6 +9,7 @@ const links = [
   ['mdi-bookshelf', 'Subjects',  '/subjects'],
   ['mdi-book-open-variant-outline', 'Chapters', '/chapters'],
   ['mdi-head-question-outline', 'Questions', '/questions'],
+  ['mdi-account-outline', 'Users', '/users'],
 ]
 
 const drawer = ref(null)
