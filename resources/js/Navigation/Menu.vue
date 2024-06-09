@@ -5,11 +5,12 @@ import { ref, computed } from 'vue'
 const page = usePage()
 
 const links = [
+  ['mdi-account-outline', 'Users', '/users'],
   ['mdi-school-outline', 'Classes', '/classes'],
   ['mdi-bookshelf', 'Subjects',  '/subjects'],
   ['mdi-book-open-variant-outline', 'Chapters', '/chapters'],
   ['mdi-head-question-outline', 'Questions', '/questions'],
-  ['mdi-account-outline', 'Users', '/users'],
+  ['mdi-export', 'Export', '/export'],
 ]
 
 const drawer = ref(null)
