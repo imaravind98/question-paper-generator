@@ -23,9 +23,13 @@ class QuestionRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function all()
+    public function all(array $chapter = null)
     {
-        return $this->model->all();
+        if($chapter == null){
+            return $this->model->all();
+        }
+
+        return $this->model->whereIn('chapter_id', $chapter)->without(['chapter'])->get();
     }
 
     /**

@@ -40,6 +40,9 @@ const removeField = (index) => {
                             No Of Questions
                         </th>
                         <th>
+                            Marks
+                        </th>
+                        <th>
                             Action
                         </th>
                     </tr>
@@ -66,6 +69,13 @@ const removeField = (index) => {
                                 label="No of Questions"
                                 variant="outlined"
                                 v-model="question.no_of_questions"
+                            />
+                        </td>
+                        <td class="pa-2">
+                            <VTextField
+                                label="Marks"
+                                variant="outlined"
+                                v-model="question.marks"
                             />
                         </td>
                         <td class="pa-2">

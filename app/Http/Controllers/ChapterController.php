@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\ChapterRepository;
+use App\Repositories\ClassRepository;
 use App\Repositories\SubjectRepository;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -13,15 +14,18 @@ class ChapterController extends Controller
 
     protected $subjectRepository;
 
+    protected $classRepository;
+
     /**
      * Constructor to bind repository to controller.
      *
      * @param ChapterRepository $chapterRepository
      */
-    public function __construct(ChapterRepository $chapterRepository, SubjectRepository $subjectRepository)
+    public function __construct(ChapterRepository $chapterRepository, SubjectRepository $subjectRepository, ClassRepository $classRepository)
     {
         $this->chapterRepository = $chapterRepository;
         $this->subjectRepository = $subjectRepository;
+        $this->classRepository = $classRepository;
     }
 
     /**
@@ -38,7 +42,8 @@ class ChapterController extends Controller
 
         return Inertia::render('Chapters/Index', [
             'chapterList' => $chapterList,
-            'subjects' => $this->subjectRepository->all()
+            'subjects' => $this->subjectRepository->all(),
+            'classes' => $this->classRepository->all()
         ]);
     }
 

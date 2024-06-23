@@ -1,12 +1,15 @@
 
 <script setup>
 import { VDialog } from 'vuetify/components';
-import { defineModel, defineProps } from 'vue'
+import { defineModel, defineProps, ref, computed } from 'vue'
 import { useChapterStore } from '../../Stores/chapterStore';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     subjects: {
+        type: Object
+    },
+    classes: {
         type: Object
     }
 })
@@ -14,6 +17,16 @@ const props = defineProps({
 const model = defineModel('isDialogVisible')
 
 const store = useChapterStore()
+
+const selectedClass = ref(undefined)
+
+const filteredSubjects = computed(function(){
+    const filteredChapter = props.subjects.filter(function(item){
+        return item.class_id == selectedClass.value
+    })
+
+    return filteredChapter
+})
 
 const closeDialog = () => {
     model.value = false
@@ -73,10 +86,24 @@ const updateModelValue = (event) => {
                             class="d-flex align-items-center"
                         >
                             <VSelect
+                                label="Class"
+                                item-value="id"
+                                item-title="name"
+                                :items="props.classes"
+                                variant="outlined"
+                                v-model="selectedClass"
+                            />
+                        </VCol>
+                        <VCol
+                            cols="12"
+                            md="12"
+                            class="d-flex align-items-center"
+                        >
+                            <VSelect
                                 label="Subjects"
                                 item-value="id"
                                 item-title="name"
-                                :items="props.subjects"
+                                :items="filteredSubjects"
                                 variant="outlined"
                                 v-model="store.chapter.subject_id"
                             />

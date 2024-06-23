@@ -1,5 +1,5 @@
 <script setup>
-import { VCardText, VForm, VSelect, VTable, VTextField } from 'vuetify/lib/components/index.mjs';
+import { VCardText, VForm, VSelect } from 'vuetify/lib/components/index.mjs';
 import { ref, defineProps, computed } from 'vue';
 import DynamicFields from '../../Components/Export/DynamicFields.vue';
 import axios from 'axios';
@@ -15,14 +15,11 @@ const props = defineProps({
     chapters: {
         type: Object,
     },
-    questions: {
-        type: Object,
-    },
 })
 
 const classes = ref()
 const subject = ref()
-const chapter = ref()
+const chapters = ref([])
 
 const filteredSubject = computed(function(){
     const filteredArray = props.subjects.filter(function(item){
@@ -41,17 +38,26 @@ const filteredChapters = computed(function(){
 })
 
 const questionTypes = [
-    { title: 'Match', value: 'match' }
+    { title: 'Match', value: 'match' },
+    { title: 'Choose', value: 'choose' },
+    { title: 'One Word', value: 'one_word'},
+    { title: 'Short Answer', value: 'short_answer'},
+    { title: 'Detail', value: 'detail' }
 ]
 
 const questions = ref([
-    { heading: undefined, questionType: undefined, no_of_questions: 0 }
+    { heading: undefined, questionType: undefined, no_of_questions: 0, marks: 0 }
 ])
 
 const { downloadFile } = useFile()
 
 const submit = async () => {
-    const res = await axios.post('export', questions, {
+    const res = await axios.post('export', 
+    {
+        chapters: chapters.value,
+        questions: questions.value
+    }, 
+    {
         responseType: 'blob'
     })
 
@@ -93,7 +99,7 @@ const submit = async () => {
                             item-title="name"
                             :items="filteredChapters"
                             variant="outlined"
-                            v-model="chapter"
+                            v-model="chapters"
                         />
                     </VCol>
                 </VRow>

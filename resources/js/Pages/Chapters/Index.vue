@@ -17,6 +17,9 @@ const props = defineProps(
         },
         subjects: {
             type: Object
+        },
+        classes: {
+            type: Object
         }
     }
 )
@@ -159,6 +162,6 @@ const changePageSize = (pageSize) => {
         </template>
         </VDataTableServer>
     </VCard>
-    <AddEditDialog v-model:isDialogVisible="addEditDialogShow" :subjects="props.subjects" />
+    <AddEditDialog v-model:isDialogVisible="addEditDialogShow" :subjects="props.subjects" :classes="props.classes" />
     <DeleteDialog v-model:isDialogVisible="deleteDialogShow" />
 </template>
