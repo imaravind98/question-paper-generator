@@ -85,7 +85,7 @@ const chapters = computed(function(){
 </script>
 <template>
     <VDialog width="900" :model-value="model" @update:model-value="($event) => { updateModelValue($event) }">
-        <vCard :title="store.question.id ? 'Edit question' : 'Add question'" class="text-center">
+        <vCard :title="store.question.id ? 'Edit question' : 'Add question'" class="text-center" color="orange-lighten-5">
             <v-card-text>
                 <VForm @submit.prevent="() => { submit() }">
                     <VRow>

@@ -12,7 +12,7 @@ export const vuetify = createVuetify({
     directives,
     ssr: true,
     theme: {
-      defaultTheme: 'light',
+      defaultTheme: 'customTheme',
       themes: {
         customTheme,
       },

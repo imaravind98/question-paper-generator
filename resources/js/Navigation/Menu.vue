@@ -18,10 +18,10 @@ const drawer = ref(null)
 const user = computed(() => page.props.auth.user)
 </script>
 <template>
-    <v-navigation-drawer v-model="drawer">
+    <v-navigation-drawer v-model="drawer" color="orange-lighten-5">
         <v-sheet
           class="pa-4 d-flex flex-column w-100 align-center"
-          color="grey-lighten-4"
+          color="orange-lighten-3"
         >
           <v-avatar
             class="mb-4"

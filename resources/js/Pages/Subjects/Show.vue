@@ -10,7 +10,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <VCard :title="props.subject?.name">
+    <VCard :title="props.subject?.name" color="orange" variant="outlined">
         <template #append>
             <Link href="/subjects" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">

@@ -11,7 +11,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <VCard :title="props.classData?.name">
+    <VCard :title="props.classData?.name" color="orange" variant="outlined">
         <template #append>
             <Link href="/classes" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">

@@ -13,16 +13,17 @@ const logout = () => {
   
       <v-main>
         <v-container
-          class="py-8 px-6"
+          class="pt-0 px-6"
           fluid
         >
           <v-row>
             <v-col
               cols="12"
             >
-              <VCard class="mb-5">
+              <VCard class="mb-5" color="orange-lighten-3">
                 <template #append>
                   <VBtn
+                    color="primary"
                     prepend-icon="mdi-logout"
                     @click="logout"
                   >

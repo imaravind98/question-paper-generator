@@ -30,7 +30,7 @@ watch(props, async function(newProps, oldProps){
 })
 
 const headers = [
-    { title: 'Name', key: 'name', sortable: false },
+    { title: 'Name', key: 'name', sortable: false, class: "blue lighten-5" },
     { title: 'Created On', key: 'created_at', width:200, sortable: false },
     { title: 'Action', key: 'action', width:200, sortable: false}
 ]
@@ -75,7 +75,7 @@ const changePageSize = (pageSize) => {
 
 </script>
 <template>
-    <VCard title="Classes">
+    <VCard title="Classes" color="orange" variant="outlined">
         <template #append>
             <div class="d-flex justify-center align-end ga-3">
                 <VTextField 
@@ -106,6 +106,7 @@ const changePageSize = (pageSize) => {
         </template>
         <VDivider />
         <VDataTableServer
+            color="light-blue"
             :headers="headers"
             :items="classStore.classesList.data"
             :items-per-page="classStore.classesList.per_page"

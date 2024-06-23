@@ -67,7 +67,7 @@ const submit = async () => {
 
 </script>
 <template>
-    <VCard title="Export">
+    <VCard title="Export" color="orange" variant="outlined">
         <VCardText>
             <VForm @submit.prevent="() => { submit() }">
                 <VRow>

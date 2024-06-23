@@ -14,7 +14,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <VCard title="Login" class="text-center">
+  <VCard title="Login" class="text-center" color="orange" variant="tonal">
     <VCardText>
       <VForm @submit.prevent="() => { submit() }">
         <VRow>
@@ -45,10 +45,10 @@ const submit = async () => {
 
           <VCol
             cols="12"
-            class="d-flex gap-4 justify-center"
+            class="d-flex gap-4 justify-center align-center"
           >
             <!-- 👉 submit and reset button -->
-            <VBtn type="submit" class="me-3">
+            <VBtn type="submit" class="me-3" color="primary">
               Submit
             </VBtn>
 
