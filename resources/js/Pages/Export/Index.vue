@@ -38,11 +38,12 @@ const filteredChapters = computed(function(){
 })
 
 const questionTypes = [
-    { title: 'Match', value: 'match' },
+    { title: 'One Word', value: 'one_word' },
     { title: 'Choose', value: 'choose' },
-    { title: 'One Word', value: 'one_word'},
-    { title: 'Short Answer', value: 'short_answer'},
-    { title: 'Detail', value: 'detail' }
+    { title: 'True Or False', value: 'true_or_false' },
+    { title: 'Match', value: 'match' },
+    { title: 'Short Answer', value: 'short_answer' },
+    { title: 'Detail', value: 'detail' },
 ]
 
 const questions = ref([

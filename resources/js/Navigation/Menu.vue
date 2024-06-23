@@ -5,12 +5,12 @@ import { ref, computed } from 'vue'
 const page = usePage()
 
 const links = [
-  ['mdi-account-outline', 'Users', '/users'],
-  ['mdi-school-outline', 'Classes', '/classes'],
-  ['mdi-bookshelf', 'Subjects',  '/subjects'],
-  ['mdi-book-open-variant-outline', 'Chapters', '/chapters'],
-  ['mdi-head-question-outline', 'Questions', '/questions'],
-  ['mdi-export', 'Export', '/export'],
+  ['mdi-account-outline', 'Users', '/users', 'admin'],
+  ['mdi-school-outline', 'Classes', '/classes', 'teacher'],
+  ['mdi-bookshelf', 'Subjects',  '/subjects', 'teacher'],
+  ['mdi-book-open-variant-outline', 'Chapters', '/chapters', 'teacher'],
+  ['mdi-head-question-outline', 'Questions', '/questions', 'teacher'],
+  ['mdi-export', 'Export', '/export', 'teacher'],
 ]
 
 const drawer = ref(null)
@@ -20,7 +20,7 @@ const user = computed(() => page.props.auth.user)
 <template>
     <v-navigation-drawer v-model="drawer">
         <v-sheet
-          class="pa-4"
+          class="pa-4 d-flex flex-column w-100 align-center"
           color="grey-lighten-4"
         >
           <v-avatar
@@ -29,14 +29,16 @@ const user = computed(() => page.props.auth.user)
             size="64"
           ></v-avatar>
   
-          <div>{{ user.name }}</div>
+          <p class="text-h6">{{ user.name }}</p>
+          <p>{{ user.group }}</p>
         </v-sheet>
   
         <v-divider></v-divider>
   
         <VList>
-            <Link :href="url" v-for="([icon, text, url], index) in links" :key="index" style="color: unset;text-decoration: none;">
+            <Link :href="url" v-for="([icon, text, url, group], index) in links" :key="index" style="color: unset;text-decoration: none;">
                 <v-list-item
+                    v-if="group === 'admin' ? user.group === 'admin' : true" 
                     :active="$page.url.startsWith(url)"
                     :prepend-icon="icon"
                     :title="text"

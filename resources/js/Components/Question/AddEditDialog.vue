@@ -60,6 +60,7 @@ const updateModelValue = (event) => {
 const quetionType = [
     { title: 'One Word', value: 'one_word' },
     { title: 'Choose', value: 'choose' },
+    { title: 'True Or False', value: 'true_or_false' },
     { title: 'Match', value: 'match' },
     { title: 'Short Answer', value: 'short_answer' },
     { title: 'Detail', value: 'detail' },
@@ -133,18 +134,6 @@ const chapters = computed(function(){
                         <VCol
                             cols="12"
                             md="6"
-                            class="d-flex align-items-center"
-                        >
-                            <VTextField
-                                label="Mark"
-                                placeholder="Marks alloted"
-                                variant="outlined"
-                                v-model="store.question.mark"
-                            />
-                        </VCol>
-                        <VCol
-                            cols="12"
-                            md="12"
                             class="d-flex align-items-center"
                         >
                             <VSelect

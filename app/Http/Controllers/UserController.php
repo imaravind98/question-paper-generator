@@ -55,6 +55,7 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users,email|string|max:255',
+            'group' => "string|max:255",
             'password'=> 'required|string|max:255'
         ]);
 
@@ -98,7 +99,8 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|unique:users,email|string|max:255',
+            'email' => "required|unique:users,email,{$id}|string|max:255",
+            'group' => "string|max:255",
             'password'=> 'required|string|max:255'
         ]);
 

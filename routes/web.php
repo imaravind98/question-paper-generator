@@ -7,6 +7,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\GroupMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,8 +16,10 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('logout', [AuthController::class, 'logout']);
 Route::middleware('auth')->group(function () {
 
-    Route::resource('users', UserController::class);
-
+    Route::middleware(GroupMiddleware::class)->group(function(){
+        Route::resource('users', UserController::class);
+    });
+    
     Route::resource('chapters', ChapterController::class);
 
     Route::resource('classes', ClassController::class);

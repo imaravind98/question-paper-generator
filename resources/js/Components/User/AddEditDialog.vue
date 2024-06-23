@@ -51,7 +51,7 @@ const updateModelValue = (event) => {
                     <VRow>
                         <VCol
                             cols="12"
-                            md="6"
+                            md="12"
                             class="d-flex align-items-center"
                         >
                             <VTextField
@@ -63,7 +63,7 @@ const updateModelValue = (event) => {
                         </VCol>
                         <VCol
                             cols="12"
-                            md="6"
+                            md="12"
                             class="d-flex align-items-center"
                         >
                             <VTextField
@@ -75,7 +75,23 @@ const updateModelValue = (event) => {
                         </VCol>
                         <VCol
                             cols="12"
-                            md="6"
+                            md="12"
+                            class="d-flex align-items-center"
+                        >
+                            <VSelect
+                                :disabled="store.user.id == 1"
+                                label="Group"
+                                :items="[
+                                    'admin',
+                                    'teacher'
+                                ]"
+                                variant="outlined"
+                                v-model="store.user.group"
+                            />
+                        </VCol>
+                        <VCol
+                            cols="12"
+                            md="12"
                             class="d-flex align-items-center"
                         >
                             <VTextField
@@ -88,7 +104,7 @@ const updateModelValue = (event) => {
                         </VCol>
                         <VCol
                             cols="12"
-                            md="6"
+                            md="12"
                             class="d-flex align-items-center"
                         >
                             <VTextField

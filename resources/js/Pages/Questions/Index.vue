@@ -41,7 +41,6 @@ watch(props, async function(newProps, oldProps){
 const headers = [
     { title: 'question', key: 'question', sortable: false },
     { title: 'Type', key: 'type', sortable: false },
-    { title: 'Mark', key: 'mark', sortable: false },
     { title: 'Class', key: 'chapter.subject.classes.name', sortable: false },
     { title: 'Subject', key: 'chapter.subject.name', sortable: false },
     { title: 'Chapter', key: 'chapter.name', sortable: false },
