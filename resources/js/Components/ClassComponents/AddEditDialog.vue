@@ -18,7 +18,7 @@ const closeDialog = () => {
 
 const submit = async () => {
 
-    if(requiredValidator(store.classess.name) != true) return
+    if(requiredValidator(store.classData.name) != true) return
 
     let res
 

@@ -10,7 +10,7 @@ const links = [
   ['mdi-bookshelf', 'Subjects',  '/subjects', 'teacher'],
   ['mdi-book-open-variant-outline', 'Chapters', '/chapters', 'teacher'],
   ['mdi-head-question-outline', 'Questions', '/questions', 'teacher'],
-  ['mdi-export', 'Export', '/export', 'teacher'],
+  ['mdi-export', 'Export', '/', 'teacher'],
 ]
 
 const drawer = ref(null)

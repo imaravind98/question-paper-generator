@@ -9,6 +9,7 @@ import AddEditDialog from '../../Components/ClassComponents/AddEditDialog.vue'
 import DeleteDialog from '../../Components/Global/dialogBoxes/DeleteDialog.vue'
 import { Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
+import { useFormatDate } from '../../Composables/useFormatDate'
 
 const props = defineProps(
     {
@@ -19,6 +20,7 @@ const props = defineProps(
 )
 
 const classStore = useClassesStore()
+const { formatDate } = useFormatDate()
 
 onMounted(async function(){
     classStore.reset()
@@ -120,6 +122,9 @@ const changePageSize = (pageSize) => {
             @update:itemsPerPage="changePageSize($event)"
             @update:page="changePage($event)"
         >
+        <template #item.created_at="{item}">
+            {{ formatDate(item.created_at) }}
+        </template>
         <template #item.action="{item}">
             <div class="d-flex ga-2">
                 <Link :href="`/classes/${item.id}`" style="color:unset">

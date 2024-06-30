@@ -24,6 +24,7 @@ const selectedClass = ref(undefined)
 const { requiredValidator } = useValidator()
 
 const filteredSubjects = computed(function(){
+    store.chapter.subject_id = undefined
     const filteredChapter = props.subjects.filter(function(item){
         return item.class_id == selectedClass.value
     })
@@ -38,7 +39,8 @@ const closeDialog = () => {
 
 const submit = async () => {
 
-    if(requiredValidator(store.chapter.name) != true || requiredValidator(store.chapter.class_id) != true || requiredValidator(store.chapter.subject_id) != true){
+    if(requiredValidator(store.chapter.name) != true || requiredValidator(store.chapter.subject_id) != true){
+        console.log('works', store.chapter)
         return
     }
 

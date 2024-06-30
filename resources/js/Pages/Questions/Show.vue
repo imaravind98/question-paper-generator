@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import { VForm, VTextField } from 'vuetify/components';
+import { useFormatDate } from '../../Composables/useFormatDate';
 
 
 const props = defineProps({
@@ -8,6 +9,8 @@ const props = defineProps({
         type: Object,
     },
 })
+
+const { formatDate } = useFormatDate()
 </script>
 <template>
     <VCard :title="props.question?.name" color="orange" variant="outlined">
@@ -21,20 +24,29 @@ const props = defineProps({
         <VCardText>
             <VForm disabled>
                 <VRow>
-                <VCol cols="12" md="12">
-                    <VTextField label="Name" :model-value="props.question?.name" variant="outlined" />
+                <VCol cols="12" md="6">
+                    <VTextField label="Name" :model-value="props.question?.question" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Created On" :model-value="props.question?.created_at" variant="outlined" />
+                    <VTextField label="Chapter" :model-value="props.question?.chapter?.name" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Updated On" :model-value="props.question?.updated_at" variant="outlined" />
+                    <VTextField label="Subject" :model-value="props.question?.chapter?.subject?.name" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Created By" :model-value="props.question?.created_by" variant="outlined" />
+                    <VTextField label="Class" :model-value="props.question?.chapter?.subject?.classes?.name" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Updated By" :model-value="props.question?.updated_by" variant="outlined" />
+                    <VTextField label="Created By" :model-value="props.question?.creator.name" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6">
+                    <VTextField label="Created On" :model-value="formatDate(props.question?.created_at)" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6" v-if="props.question?.updated_at">
+                    <VTextField label="Updated By" :model-value="props.question?.modifier?.name" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6" v-if="props.question?.updated_at">
+                    <VTextField label="Updated On" :model-value="formatDate(props.question?.updated_at)" variant="outlined" />
                 </VCol>
             </VRow>
             </VForm>

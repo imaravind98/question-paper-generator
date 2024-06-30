@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import { VForm, VTextField } from 'vuetify/components';
 import { defineProps } from 'vue';
+import { useFormatDate } from '../../Composables/useFormatDate';
 
 
 const props = defineProps({
@@ -9,6 +10,8 @@ const props = defineProps({
         type: Object,
     },
 })
+
+const { formatDate } = useFormatDate()
 </script>
 <template>
     <VCard :title="props.classData?.name" color="orange" variant="outlined">
@@ -22,22 +25,22 @@ const props = defineProps({
         <VCardText>
             <VForm disabled>
                 <VRow>
-                <VCol cols="12" md="12">
-                    <VTextField label="Name" :model-value="props.classData?.name" variant="outlined" />
-                </VCol>
-                <VCol cols="12" md="6">
-                    <VTextField label="Created On" :model-value="props.classData?.created_at" variant="outlined" />
-                </VCol>
-                <VCol cols="12" md="6">
-                    <VTextField label="Updated On" :model-value="props.classData?.updated_at" variant="outlined" />
-                </VCol>
-                <VCol cols="12" md="6">
-                    <VTextField label="Created By" :model-value="props.classData?.created_by" variant="outlined" />
-                </VCol>
-                <VCol cols="12" md="6">
-                    <VTextField label="Updated By" :model-value="props.classData?.updated_by" variant="outlined" />
-                </VCol>
-            </VRow>
+                    <VCol cols="12" md="12">
+                        <VTextField label="Name" :model-value="props.classData?.name" variant="outlined" />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                        <VTextField label="Created By" :model-value="props.classData?.creator.name" variant="outlined" />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                        <VTextField label="Created On" :model-value="formatDate(props.classData?.created_at)" variant="outlined" />
+                    </VCol>
+                    <VCol cols="12" md="6" v-if="props.classData?.updated_at">
+                        <VTextField label="Updated By" :model-value="props.classData?.modifier?.name" variant="outlined" />
+                    </VCol>
+                    <VCol cols="12" md="6" v-if="props.classData?.updated_at">
+                        <VTextField label="Updated On" :model-value="formatDate(props.classData?.updated_at)" variant="outlined" />
+                    </VCol>
+                </VRow>
             </VForm>
         </VCardText>
     </VCard>

@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('questions', QuestionController::class);
 
-    Route::get('export', [ExportController::class, 'index']);
-    Route::post('export', [ExportController::class, 'export']);
+    Route::get('/', [ExportController::class, 'index'])->name('export.index');
+    Route::post('/export', [ExportController::class, 'export'])->name('export.export');
 
     Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
 });

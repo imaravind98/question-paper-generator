@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -24,11 +23,6 @@ class User extends Authenticatable
         'password',
         'image',
         'group'
-    ];
-
-    protected $with = [
-        'creator',
-        'modifier'
     ];
 
     /**
@@ -57,15 +51,5 @@ class User extends Authenticatable
     public function getImageAttribute ()
     {
         return Storage::url($this->attributes['image']);
-    }
-
-    public function creator () : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by', 'id');
-    }
-
-    public function modifier () : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 }

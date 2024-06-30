@@ -10,7 +10,10 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return inertia('Login/Index');   
+        if (Auth::check()) {
+            return redirect()->route('export.index');
+        }
+        return inertia('Login/Index'); 
     }
 
     public function login (Request $request)
@@ -19,7 +22,7 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'string|required|max:20|min:8'
         ]))){
-            return to_route('classes.index');
+            return to_route('export.index');
         }
         else{
             return back()->withErrors([
