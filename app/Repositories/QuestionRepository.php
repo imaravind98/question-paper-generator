@@ -40,7 +40,7 @@ class QuestionRepository
      */
     public function list($size)
     {
-        return $this->model->paginate($size)->withQueryString();
+        return $this->model->orderBy('id', 'DESC')->paginate($size)->withQueryString();
     }
 
     /**
@@ -50,7 +50,7 @@ class QuestionRepository
      */
     public function search($query, $size)
     {
-        return $this->model->search($query)->paginate($size)->withQueryString();
+        return $this->model->search($query)->orderBy('id', 'DESC')->paginate($size)->withQueryString();
     }
 
     /**

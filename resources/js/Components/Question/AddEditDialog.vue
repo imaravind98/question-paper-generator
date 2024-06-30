@@ -8,6 +8,7 @@ import { router } from '@inertiajs/vue3';
 import ChooseBestAnswer from './ChooseBestAnswer.vue';
 import MatchTheFollowing from './MatchTheFollowing.vue'
 import { useValidator } from '../../Composables/useValidator';
+import ImageQuestion from './ImageQuestion.vue';
 
 const props = defineProps({
     classes: {
@@ -88,6 +89,7 @@ const quetionType = [
     { title: 'Match', value: 'match' },
     { title: 'Short Answer', value: 'short_answer' },
     { title: 'Detail', value: 'detail' },
+    { title: 'Image Question', value: 'image_question' }
 ]
 
 
@@ -187,6 +189,7 @@ const chapters = computed(function(){
                     </VRow>
                     <ChooseBestAnswer v-if="store.question.type == 'choose'" v-model="store.question.option" />
                     <MatchTheFollowing v-if="store.question.type == 'match'" v-model="store.question.option" />
+                    <ImageQuestion v-if="store.question.type == 'image_question'" v-model="store.question.option" />
                     <VRow>
                         <VCol
                             cols="12"

@@ -32,7 +32,7 @@ class ImageUploadController extends Controller
 
         // Handle the uploaded file
         if ($request->file('image')) {
-            $imagePath = Storage::disk('public')->put('images', $request->file('image'));
+            $imagePath = Storage::disk('public')->put($request['path'], $request->file('image'));
             return $imagePath;
         }
 

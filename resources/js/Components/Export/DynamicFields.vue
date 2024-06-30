@@ -60,16 +60,16 @@ const removeField = (index) => {
                         </td>
                         <td class="pa-2">
                             <VTextField
-                                :disabled="question.questionType == 'match'"
+                                :disabled="question.questionType == 'match' || question.questionType == 'image_question'"
                                 label="Heading"
                                 variant="outlined"
                                 v-model="question.heading"
                             />
                         </td>
                         <td class="pa-2">
-                            <span :ref="(el) => { if(question.questionType == 'match') question.no_of_questions = 1 }" />
+                            <span :ref="(el) => { if(question.questionType == 'match' || question.questionType == 'image_question') question.no_of_questions = 1 }" />
                             <VTextField
-                                :disabled="question.questionType == 'match'"
+                                :disabled="question.questionType == 'match' || question.questionType == 'image_question'"
                                 label="No of Questions"
                                 variant="outlined"
                                 v-model="question.no_of_questions"

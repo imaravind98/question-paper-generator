@@ -51,10 +51,11 @@
         if($item['questionType'] == 'match' && count($filteredQuestions)){
           $filteredQuestions = $filteredQuestions[0];
         }
+        // dd($filteredQuestions);
       @endphp
       <div>
         <div class="mb-1 border-b">
-          @if($item['questionType'] != 'match')
+          @if($item['questionType'] != 'match' && $item['questionType'] != 'image_question')
             <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $item['heading'] }}</strong></p>
           @else
             <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $filteredQuestions['question'] }}</strong></p>
@@ -72,6 +73,10 @@
               @elseif ($question['type'] == 'true_or_false')
                 <li>
                   {{ $question['question'] }} (  )
+                </li>
+              @elseif ($question['type'] == 'image_question')
+                <li>
+                  <img src="{{public_path($question['option'])}}" alt="">
                 </li>
               @elseif ($question['type'] == 'choose')
                 <li>

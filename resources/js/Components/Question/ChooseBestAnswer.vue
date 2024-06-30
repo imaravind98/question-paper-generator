@@ -4,7 +4,6 @@ import { defineModel } from 'vue';
 
 const model = defineModel()
 
-console.log(model.value.length)
 model.value = model.value.length && model.value.length > 4 ? model.value : [
     { option: 'A', value: '' },
     { option: 'B', value: '' },
