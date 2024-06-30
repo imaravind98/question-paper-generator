@@ -63,7 +63,7 @@ const edit = (item) => {
 const urlParams = new URLSearchParams(window.location.search);
 
 const page = ref(urlParams.get('page') ?? 1)
-const size = ref(urlParams.get('size')?? 10)
+const size = ref(urlParams.get('size')?? 15)
 const searchTerm = ref(urlParams.get('search')?? '')
 
 watch(searchTerm, async function(newSearchTerm, oldSearchTerm){

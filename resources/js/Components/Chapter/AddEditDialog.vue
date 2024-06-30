@@ -4,6 +4,7 @@ import { VDialog } from 'vuetify/components';
 import { defineModel, defineProps, ref, computed } from 'vue'
 import { useChapterStore } from '../../Stores/chapterStore';
 import { router } from '@inertiajs/vue3';
+import { useValidator } from '../../Composables/useValidator'
 
 const props = defineProps({
     subjects: {
@@ -20,6 +21,8 @@ const store = useChapterStore()
 
 const selectedClass = ref(undefined)
 
+const { requiredValidator } = useValidator()
+
 const filteredSubjects = computed(function(){
     const filteredChapter = props.subjects.filter(function(item){
         return item.class_id == selectedClass.value
@@ -34,6 +37,11 @@ const closeDialog = () => {
 }
 
 const submit = async () => {
+
+    if(requiredValidator(store.chapter.name) != true || requiredValidator(store.chapter.class_id) != true || requiredValidator(store.chapter.subject_id) != true){
+        return
+    }
+
     let res
 
     if(store.chapter.id){
@@ -71,24 +79,26 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
                             variant="outlined"
                             label="Chapter Name"
                             v-model="store.chapter.name"
+                            :rules="[requiredValidator]"
                             placeholder="Chapter Name"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Class"
                                 item-value="id"
                                 item-title="name"
+                                :rules="[requiredValidator]"
                                 :items="props.classes"
                                 variant="outlined"
                                 v-model="selectedClass"
@@ -97,13 +107,14 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Subjects"
                                 item-value="id"
                                 item-title="name"
                                 :items="filteredSubjects"
+                                :rules="[requiredValidator]"
                                 variant="outlined"
                                 v-model="store.chapter.subject_id"
                             />

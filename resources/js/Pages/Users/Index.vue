@@ -31,6 +31,7 @@ watch(props, async function(newProps, oldProps){
 
 const headers = [
     { title: 'Name', key: 'name', sortable: false },
+    { title: 'Group', key: 'group', sortable: false },
     { title: 'Created On', key: 'created_at', width:200, sortable: false },
     { title: 'Action', key: 'action', width:200, sortable: false}
 ]
@@ -55,7 +56,7 @@ const edit = (item) => {
 const urlParams = new URLSearchParams(window.location.search);
 
 const page = ref(urlParams.get('page') ?? 1)
-const size = ref(urlParams.get('size')?? 10)
+const size = ref(urlParams.get('size')?? 15)
 const searchTerm = ref(urlParams.get('search')?? '')
 
 watch(searchTerm, async function(newSearchTerm, oldSearchTerm){

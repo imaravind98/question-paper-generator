@@ -47,10 +47,17 @@ class ExportController extends Controller
     public function export (Request $request)
     {
         $questions = $this->questionRepository->all($request['chapters']);
+        $subject = $this->subjectRepository->find($request['subject']);
+        $classes = $this->classRepository->find($request['classes']);
 
         $pdf = Pdf::loadView('export_question', [
             'data' => $request['questions'],
-            'questions' => $questions->toArray()
+            'questions' => $questions->toArray(),
+            'subject' => $subject->toArray(),
+            'classes' => $classes->toArray(),
+            'testName' => $request['testName'],
+            'totalMark' => $request['totalMark'],
+            'duration' => $request['duration']
         ]);
 
         return $pdf->download('question_paper.pdf');

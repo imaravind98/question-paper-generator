@@ -24,7 +24,7 @@ model.value = model.value.length && model.value.length > 4 ? model.value : [
         >
             <VTextField
                 :label="option.option"
-                placeholder="Marks alloted"
+                placeholder="Option"
                 variant="outlined"
                 v-model="option.value"
             />

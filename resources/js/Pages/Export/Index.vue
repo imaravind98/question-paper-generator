@@ -1,5 +1,5 @@
 <script setup>
-import { VCardText, VForm, VSelect } from 'vuetify/lib/components/index.mjs';
+import { VCardText, VForm, VSelect, VTextField } from 'vuetify/lib/components/index.mjs';
 import { ref, defineProps, computed } from 'vue';
 import DynamicFields from '../../Components/Export/DynamicFields.vue';
 import axios from 'axios';
@@ -20,6 +20,9 @@ const props = defineProps({
 const classes = ref()
 const subject = ref()
 const chapters = ref([])
+const totalMark = ref(0)
+const duration = ref(0)
+const testName = ref('')
 
 const filteredSubject = computed(function(){
     const filteredArray = props.subjects.filter(function(item){
@@ -55,8 +58,13 @@ const { downloadFile } = useFile()
 const submit = async () => {
     const res = await axios.post('export', 
     {
+        testName: testName.value,
+        duration: duration.value,
+        totalMark: totalMark.value,
         chapters: chapters.value,
-        questions: questions.value
+        questions: questions.value,
+        subject: subject.value,
+        classes: classes.value
     }, 
     {
         responseType: 'blob'
@@ -91,7 +99,7 @@ const submit = async () => {
                             v-model="subject"
                         />
                     </VCol>
-                    <VCol cols="12" md="12">
+                    <VCol cols="12" md="6">
                         <VSelect
                             label="Chapters"
                             multiple
@@ -101,6 +109,32 @@ const submit = async () => {
                             :items="filteredChapters"
                             variant="outlined"
                             v-model="chapters"
+                        />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                        <VTextField
+                            label="Test Name"
+                            placeholder="Enter Test Name"
+                            variant="outlined"
+                            v-model="testName"
+                        />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                        <VTextField
+                            label="Total Marks"
+                            type="number"
+                            placeholder="Enter Total Marks"
+                            variant="outlined"
+                            v-model="totalMark"
+                        />
+                    </VCol>
+                    <VCol cols="12" md="6">
+                        <VTextField
+                            label="Duration(Mins)"
+                            type="number"
+                            placeholder="Enter Duration"
+                            variant="outlined"
+                            v-model="duration"
                         />
                     </VCol>
                 </VRow>

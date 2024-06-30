@@ -4,10 +4,12 @@ import { VDialog } from 'vuetify/components';
 import { defineModel } from 'vue'
 import { useClassesStore } from '../../Stores/classStore';
 import { router } from '@inertiajs/vue3';
+import { useValidator } from '../../Composables/useValidator';
 
 const model = defineModel('isDialogVisible')
 
 const store = useClassesStore()
+const { requiredValidator } = useValidator()
 
 const closeDialog = () => {
     model.value = false
@@ -15,6 +17,9 @@ const closeDialog = () => {
 }
 
 const submit = async () => {
+
+    if(requiredValidator(store.classess.name) != true) return
+
     let res
 
     if(store.classData.id){
@@ -52,12 +57,13 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
                             variant="outlined"
                             label="Name"
                             v-model="store.classData.name"
+                            :rules="[requiredValidator]"
                             placeholder="class Name"
                             />
                         </VCol>
