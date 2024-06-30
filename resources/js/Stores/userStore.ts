@@ -7,6 +7,7 @@ export type user = {
     id?:number,
     name?:string,
     email?:string,
+    image?: object,
     group?: string,
     password?: string,
     confirm?:string,
@@ -34,19 +35,40 @@ export const useUserStore = defineStore('userStore', () => {
     }
 
     const create = async () => {
-        try{
-            const res = await axios.post('/users', user.value)
-            return res
+        const formData = new FormData();
+        Object.keys(user.value).forEach(key => {
+            formData.append(key, user.value[key]);
+        });
+    
+        try {
+            const res = await axios.post('/users', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return res;
+        } catch (error) {
+            return error.response.data;
         }
-        catch(error){
-            return error.response.data
-        }
-        
     }
-
+    
     const update = async () => {
-        const res = await axios.put(`/users/${user.value.id}`, user.value)
-        return res
+        const formData = new FormData();
+        formData.append('_method', 'PUT')
+        Object.keys(user.value).forEach(key => {
+            formData.append(key, user.value[key]);
+        });
+    
+        try {
+            const res = await axios.post(`/users/${user.value.id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return res;
+        } catch (error) {
+            return error.response.data;
+        }
     }
 
     const remove = async () => {
@@ -59,6 +81,7 @@ export const useUserStore = defineStore('userStore', () => {
             id: undefined,
             name: undefined,
             email: undefined,
+            image: undefined,
             group: 'teacher',
             password: undefined,
             confirm: undefined,

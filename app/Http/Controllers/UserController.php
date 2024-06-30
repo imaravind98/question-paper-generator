@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepository;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -55,9 +56,15 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users,email|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'group' => "string|max:255",
             'password'=> 'required|string|max:255'
         ]);
+
+        if ($request->file('image')) {
+            $imagePath = Storage::disk('public')->put('images/profile', $request->file('image'));
+            $data['image'] = $imagePath;
+        }
 
         return $this->userRepository->create($data);
     }
@@ -98,13 +105,17 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => "required|unique:users,email,{$id}|string|max:255",
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'group' => "string|max:255",
             'password'=> 'required|string|max:255'
         ]);
 
-        $this->userRepository->update($id, $data);
+        if ($request->file('image')) {
+            $imagePath = Storage::disk('public')->put('images/profile', $request->file('image'));
+            $data['image'] = $imagePath;
+        }
 
-        return true;
+        return $this->userRepository->update($id, $data);
     }
 
     /**

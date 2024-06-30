@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Chapter;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Repository class for managing Chapter model operations.
@@ -70,7 +71,7 @@ class ChapterRepository
      */
     public function create(array $data)
     {
-        $data['created_by'] = 1;
+        $data['created_by'] = Auth::id();
         return $this->model->create($data);
     }
 
@@ -84,6 +85,7 @@ class ChapterRepository
     public function update($id, array $data)
     {
         $chapter = $this->model->find($id);
+        $data['updated_by'] = Auth::id();
         if ($chapter) {
             $chapter->update($data);
             return $chapter;

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
@@ -30,4 +31,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('export', [ExportController::class, 'index']);
     Route::post('export', [ExportController::class, 'export']);
+
+    Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
 });

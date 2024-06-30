@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { VForm, VTextField } from 'vuetify/components';
+import { VForm, VImg, VTextField } from 'vuetify/components';
 import { defineProps } from 'vue';
 
 
 const props = defineProps({
-    classData: {
+    UserData: {
         type: Object,
     },
 })
 </script>
 <template>
-    <VCard :title="props.classData?.name" color="orange" variant="outlined">
+    <VCard :title="props.UserData?.name" color="orange" variant="outlined">
         <template #append>
             <Link href="/users" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">
@@ -22,20 +22,30 @@ const props = defineProps({
         <VCardText>
             <VForm disabled>
                 <VRow>
-                <VCol cols="12" md="12">
-                    <VTextField label="Name" :model-value="props.classData?.name" variant="outlined" />
+                <VCol cols="12" md="6">
+                    <VTextField label="Name" :model-value="props.UserData?.name" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Created On" :model-value="props.classData?.created_at" variant="outlined" />
+                    <VTextField label="Email" :model-value="props.UserData?.email" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Updated On" :model-value="props.classData?.updated_at" variant="outlined" />
+                    <VTextField label="Group" :model-value="props.UserData?.group" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6" class="d-flex justify-start align-start" rounded="xs">
+                    <p class="mr-4">Image</p>
+                    <VImg :src="props.UserData?.image" max-width="50" height="50"/>
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Created By" :model-value="props.classData?.created_by" variant="outlined" />
+                    <VTextField label="Created On" :model-value="props.UserData?.created_at" variant="outlined" />
                 </VCol>
                 <VCol cols="12" md="6">
-                    <VTextField label="Updated By" :model-value="props.classData?.updated_by" variant="outlined" />
+                    <VTextField label="Created By" :model-value="props.UserData?.created_by" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6" v-if="props.UserData?.updated_at">
+                    <VTextField label="Updated On" :model-value="props.UserData?.updated_at" variant="outlined" />
+                </VCol>
+                <VCol cols="12" md="6" v-if="props.UserData?.updated_at">
+                    <VTextField label="Updated By" :model-value="props.UserData?.updated_by" variant="outlined" />
                 </VCol>
             </VRow>
             </VForm>

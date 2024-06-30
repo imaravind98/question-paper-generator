@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Repository User for managing User model operations.
@@ -70,6 +71,7 @@ class UserRepository
      */
     public function create(array $data)
     {
+        $data['created_by'] = Auth::id();
         return $this->model->create($data);
     }
 
@@ -83,6 +85,7 @@ class UserRepository
     public function update($id, array $data)
     {
         $user = $this->model->find($id);
+        $data['updated_by'] = Auth::id();
         if ($user) {
             $user->update($data);
             return $user;

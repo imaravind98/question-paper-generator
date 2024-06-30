@@ -27,6 +27,7 @@ const user = computed(() => page.props.auth.user)
             class="mb-4"
             color="grey-darken-1"
             size="64"
+            :image="user.image"
           ></v-avatar>
   
           <p class="text-h6">{{ user.name }}</p>

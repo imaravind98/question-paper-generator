@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionRepository
 {
@@ -71,7 +72,7 @@ class QuestionRepository
      */
     public function create(array $data)
     {
-        $data['created_by'] = 1; // Assuming a default created_by value
+        $data['created_by'] = Auth::id(); // Assuming a default created_by value
         return $this->model->create($data);
     }
 
@@ -85,6 +86,7 @@ class QuestionRepository
     public function update($id, array $data)
     {
         $question = $this->model->find($id);
+        $data['updated_by'] = Auth::id();
         if ($question) {
             $question->update($data);
             return $question;

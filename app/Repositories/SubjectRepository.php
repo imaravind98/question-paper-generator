@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Repository class for managing Subject model operations.
@@ -70,7 +71,7 @@ class SubjectRepository
      */
     public function create(array $data)
     {
-        $data['created_by'] = 1;
+        $data['created_by'] = Auth::id();
         return $this->model->create($data);
     }
 
@@ -84,6 +85,7 @@ class SubjectRepository
     public function update($id, array $data)
     {
         $subject = $this->model->find($id);
+        $data['updated_by'] = Auth::id();
         if ($subject) {
             $subject->update($data);
             return $subject;

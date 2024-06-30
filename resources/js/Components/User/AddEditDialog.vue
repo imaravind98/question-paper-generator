@@ -150,6 +150,19 @@ const updateModelValue = (event) => {
                                 :rules="[requiredValidator, confirmPasswordValidator(store.user.confirm, store.user.password)]"
                             />
                         </VCol>
+                        <VCol
+                            cols="12"
+                            md="12"
+                            class="d-flex align-items-center text-left"
+                        >
+                            <VFileInput
+                                label="Upload Image"
+                                v-model="store.user.image"
+                                variant="outlined"
+                                placeholder="Choose a image"
+                                prepend-icon="mdi-camera-outline"
+                            />
+                        </VCol>
                     </VRow>
                     <VRow>
                         <VCol

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 
 class Classes extends Model
@@ -29,5 +29,20 @@ class Classes extends Model
             "id" => $this->id,
             "name" => $this->name
         ];
+    }
+
+    protected $with = [
+        'creator',
+        'modifier'
+    ];
+
+    public function creator () : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function modifier () : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 }

@@ -122,7 +122,7 @@ const changePageSize = (pageSize) => {
         >
         <template #item.action="{item}">
             <div class="d-flex ga-2">
-                <Link :href="`/User/${item.id}`" style="color:unset">
+                <Link :href="`/users/${item.id}`" style="color:unset">
                     <v-btn variant="flat">
                         <VIcon icon="mdi-eye-outline" />
                         <VTooltip
