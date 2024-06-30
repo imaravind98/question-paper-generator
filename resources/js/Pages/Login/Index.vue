@@ -1,15 +1,21 @@
 <script lang="ts" setup>
-import { ref, defineOptions } from 'vue'
+import { defineOptions } from 'vue'
 import Login from '../../Layout/Login.vue'
-import { router } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3'
+
+const form = useForm({
+  email: null,
+  password: null,
+  remember: false,
+})
+
 
 defineOptions({ layout: Login })
 
-const email = ref('')
-const password = ref<string>()
-
 const submit = async () => {
-  router.post('/login', { email: email.value, password: password.value })
+  form.post('/login')
+  console.log(form)
+
 }
 </script>
 
@@ -18,29 +24,31 @@ const submit = async () => {
     <VCardText>
       <VForm @submit.prevent="() => { submit() }">
         <VRow>
-          <VCol cols="12">
+          <VCol cols="12" class="text-left">
             <!-- 👉 Email -->
             <VTextField
               variant="outlined"
-              v-model="email"
+              v-model="form.email"
               label="Email"
               type="email"
               placeholder="johndoe@email.com"
+              :error-messages="form.errors?.email ? [form.errors.email] : []"
             />
           </VCol>
 
-          <VCol cols="12">
+          <VCol cols="12" class="text-left">
             <!-- 👉 Password -->
             <VTextField
               variant="outlined"
-              v-model="password"
+              v-model="form.password"
               label="Password"
               autocomplete="on"
               type="password"
               persistent-hint
               placeholder="············"
-              hint="Your password must be 8-20 characters long."
+              :error-messages="form.errors?.password ? [form.errors.password] : []"
             />
+            <p style="color: red;">{{ form.errors?.password }}</p>
           </VCol>
 
           <VCol

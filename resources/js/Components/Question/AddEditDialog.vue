@@ -1,12 +1,13 @@
 
 <script setup>
 "use strict"
-import { VDialog, VTextField, VTextarea } from 'vuetify/components';
+import { VDialog, VTextarea } from 'vuetify/components';
 import { computed, defineModel } from 'vue'
 import { useQuestionStore } from '../../Stores/questionStore';
 import { router } from '@inertiajs/vue3';
 import ChooseBestAnswer from './ChooseBestAnswer.vue';
 import MatchTheFollowing from './MatchTheFollowing.vue'
+import { useValidator } from '../../Composables/useValidator';
 
 const props = defineProps({
     classes: {
@@ -24,12 +25,35 @@ const model = defineModel('isDialogVisible')
 
 const store = useQuestionStore()
 
+const { requiredValidator } = useValidator() 
+
 const closeDialog = () => {
     model.value = false
     store.reset()
 }
 
 const submit = async () => {
+
+    if(requiredValidator(store.question.class_id) != true){
+        return
+    }
+
+    if(requiredValidator(store.question.subject_id) != true){
+        return
+    }
+
+    if(requiredValidator(store.question.chapter_id) != true){
+        return
+    }
+
+    if(requiredValidator(store.question.type) != true){
+        return
+    }
+
+    if(requiredValidator(store.question.question) != true){
+        return
+    }
+
     let res
 
     if(store.question.id){
@@ -92,7 +116,7 @@ const chapters = computed(function(){
                         <VCol
                             cols="12"
                             md="6"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Class"
@@ -101,12 +125,13 @@ const chapters = computed(function(){
                                 :items="props.classes"
                                 variant="outlined"
                                 v-model="store.question.class_id"
+                                :rules="[requiredValidator]"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="6"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Subject"
@@ -115,12 +140,13 @@ const chapters = computed(function(){
                                 :items="subjects"
                                 variant="outlined"
                                 v-model="store.question.subject_id"
+                                :rules="[requiredValidator]"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="6"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Chapter"
@@ -129,30 +155,33 @@ const chapters = computed(function(){
                                 :items="chapters"
                                 variant="outlined"
                                 v-model="store.question.chapter_id"
+                                :rules="[requiredValidator]"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="6"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Type"
                                 :items="quetionType"
                                 variant="outlined"
                                 v-model="store.question.type"
+                                :rules="[requiredValidator]"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextarea
                             variant="outlined"
                             label="question"
                             v-model="store.question.question"
                             placeholder="question"
+                            :rules="[requiredValidator]"
                             />
                         </VCol>
                     </VRow>

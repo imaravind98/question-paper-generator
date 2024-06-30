@@ -4,6 +4,7 @@ import { VDialog } from 'vuetify/components';
 import { defineModel, defineProps } from 'vue'
 import { useSubjectStore } from '../../Stores/subjectStore';
 import { router } from '@inertiajs/vue3';
+import { useValidator } from '../../Composables/useValidator';
 
 const props = defineProps({
     classes: {
@@ -15,12 +16,17 @@ const model = defineModel('isDialogVisible')
 
 const store = useSubjectStore()
 
+const { requiredValidator } = useValidator()
+
 const closeDialog = () => {
     model.value = false
     store.reset()
 }
 
 const submit = async () => {
+
+    if(requiredValidator(store.subject.class_id) != true || requiredValidator(store.subject.name) != true) return
+
     let res
 
     if(store.subject.id){
@@ -58,25 +64,27 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
                                 variant="outlined"
                                 label="Name"
                                 v-model="store.subject.name"
+                                :rules="[requiredValidator]"
                                 placeholder="Subject Name"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VSelect
                                 label="Class"
                                 item-value="id"
                                 item-title="name"
                                 :items="props.classes"
+                                :rules="[requiredValidator]"
                                 variant="outlined"
                                 v-model="store.subject.class_id"
                             />

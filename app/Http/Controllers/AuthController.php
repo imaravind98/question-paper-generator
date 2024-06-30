@@ -15,11 +15,18 @@ class AuthController extends Controller
 
     public function login (Request $request)
     {
-        Auth::attempt([
-            'email' => $request['email'],
-            'password' => $request['password']
-        ]);
-        return to_route('classes.index');
+        if(Auth::attempt($request->validate([
+            'email' => 'email|required',
+            'password' => 'string|required|max:20|min:8'
+        ]))){
+            return to_route('classes.index');
+        }
+        else{
+            return back()->withErrors([
+                'email' => 'Email or Password is incorrect.',
+            ])->withInput();
+        }
+        
     }
 
     public function logout()

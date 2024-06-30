@@ -1,20 +1,42 @@
 
 <script setup>
 import { VDialog } from 'vuetify/components';
-import { defineModel, defineProps } from 'vue'
+import { defineModel, ref } from 'vue'
 import { useUserStore } from '../../Stores/userStore';
 import { router } from '@inertiajs/vue3';
+import { useValidator } from '../../Composables/useValidator';
 
 const model = defineModel('isDialogVisible')
 
 const store = useUserStore()
 
+const { requiredValidator, confirmPasswordValidator } = useValidator()
+
+const errorMessages = ref({})
+
 const closeDialog = () => {
     model.value = false
+    errorMessages.value = {}
     store.reset()
 }
 
 const submit = async () => {
+    if(requiredValidator(store.user.name) != true){
+        return
+    }
+    if(requiredValidator(store.user.email) != true){
+        return
+    }
+    if(requiredValidator(store.user.password) != true){
+        return
+    }
+    if(requiredValidator(store.user.confirm) != true){
+        return
+    }
+    if(confirmPasswordValidator(store.user.confirm, store.user.password) != true){
+        return 
+    }
+
     let res
 
     if(store.user.id){
@@ -24,14 +46,20 @@ const submit = async () => {
         res = await store.create()
     }
 
-    if(res){
+    if(!res.errors){
         router.reload({
             only: [
                 'userList'
             ]
         })
     }
+    else{
+        errorMessages.value = res.errors
+        console.log(res.errors)
+        return 
+    }
     model.value = false
+    errorMessages.value = {}
     store.reset()
 }
 
@@ -40,6 +68,7 @@ const updateModelValue = (event) => {
         store.reset()
     }
     model.value = event
+    errorMessages.value = {}
 }
 
 </script>
@@ -52,25 +81,28 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
-                            variant="outlined"
-                            label="user Name"
-                            v-model="store.user.name"
-                            placeholder="user Name"
+                                variant="outlined"
+                                label="user Name"
+                                v-model="store.user.name"
+                                placeholder="user Name"
+                                :rules="[requiredValidator]"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex flex-column align-items-center text-left"
                         >
                             <VTextField
                                 variant="outlined"
                                 label="user Email"
                                 v-model="store.user.email"
                                 placeholder="user Email"
+                                :rules="[requiredValidator]"
+                                :errorMessages="errorMessages.email?.length ? [errorMessages.email[0]] : []"
                             />
                         </VCol>
                         <VCol
@@ -92,7 +124,7 @@ const updateModelValue = (event) => {
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
                                 type="password"
@@ -100,12 +132,14 @@ const updateModelValue = (event) => {
                                 label="user Password"
                                 v-model="store.user.password"
                                 placeholder="user Password"
+                                :rules="[requiredValidator]"
+                                :errorMessages="errorMessages.password?.length ? [errorMessages.password[0]] : []"
                             />
                         </VCol>
                         <VCol
                             cols="12"
                             md="12"
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center text-left"
                         >
                             <VTextField
                                 type="password"
@@ -113,6 +147,7 @@ const updateModelValue = (event) => {
                                 label="Confirm Password"
                                 v-model="store.user.confirm"
                                 placeholder="Confirm Password"
+                                :rules="[requiredValidator, confirmPasswordValidator(store.user.confirm, store.user.password)]"
                             />
                         </VCol>
                     </VRow>

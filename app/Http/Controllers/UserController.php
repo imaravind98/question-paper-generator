@@ -59,9 +59,7 @@ class UserController extends Controller
             'password'=> 'required|string|max:255'
         ]);
 
-        $this->userRepository->create($data);
-
-        return true;
+        return $this->userRepository->create($data);
     }
 
     /**

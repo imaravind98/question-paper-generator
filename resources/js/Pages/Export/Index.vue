@@ -4,6 +4,7 @@ import { ref, defineProps, computed } from 'vue';
 import DynamicFields from '../../Components/Export/DynamicFields.vue';
 import axios from 'axios';
 import { useFile } from '../../Composables/useFile.ts'
+import { useValidator } from '../../Composables/useValidator';
 
 const props = defineProps({
     classes: {
@@ -23,6 +24,7 @@ const chapters = ref([])
 const totalMark = ref(0)
 const duration = ref(0)
 const testName = ref('')
+const { requiredValidator } = useValidator()
 
 const filteredSubject = computed(function(){
     const filteredArray = props.subjects.filter(function(item){
@@ -56,6 +58,30 @@ const questions = ref([
 const { downloadFile } = useFile()
 
 const submit = async () => {
+    if(requiredValidator(testName.value) != true){
+        return
+    }
+
+    if(requiredValidator(duration.value) != true){
+        return
+    }
+
+    if(requiredValidator(totalMark.value) != true){
+        return
+    }
+
+    if(requiredValidator(chapters.value) != true){
+        return
+    }
+
+    if(requiredValidator(subject.value) != true){
+        return
+    }
+
+    if(requiredValidator(classes.value) != true){
+        return
+    }
+
     const res = await axios.post('export', 
     {
         testName: testName.value,
@@ -87,6 +113,7 @@ const submit = async () => {
                             :items="props.classes"
                             variant="outlined"
                             v-model="classes"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -97,6 +124,7 @@ const submit = async () => {
                             :items="filteredSubject"
                             variant="outlined"
                             v-model="subject"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -109,6 +137,7 @@ const submit = async () => {
                             :items="filteredChapters"
                             variant="outlined"
                             v-model="chapters"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -117,6 +146,7 @@ const submit = async () => {
                             placeholder="Enter Test Name"
                             variant="outlined"
                             v-model="testName"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -126,6 +156,7 @@ const submit = async () => {
                             placeholder="Enter Total Marks"
                             variant="outlined"
                             v-model="totalMark"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                     <VCol cols="12" md="6">
@@ -135,6 +166,7 @@ const submit = async () => {
                             placeholder="Enter Duration"
                             variant="outlined"
                             v-model="duration"
+                            :rules="[requiredValidator]"
                         />
                     </VCol>
                 </VRow>

@@ -7,7 +7,16 @@ export const useValidator = () => {
         return true
     }
 
+    const confirmPasswordValidator = ( confirm, password ) => {
+        if(confirm !== password){
+            return "Passwords doesn't match"
+        }
+
+        return true
+    }
+
     return {
-        requiredValidator
+        requiredValidator,
+        confirmPasswordValidator
     }
 }

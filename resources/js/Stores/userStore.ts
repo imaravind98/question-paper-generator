@@ -34,8 +34,14 @@ export const useUserStore = defineStore('userStore', () => {
     }
 
     const create = async () => {
-        const res = await axios.post('/users', user.value)
-        return res
+        try{
+            const res = await axios.post('/users', user.value)
+            return res
+        }
+        catch(error){
+            return error.response.data
+        }
+        
     }
 
     const update = async () => {
@@ -53,7 +59,7 @@ export const useUserStore = defineStore('userStore', () => {
             id: undefined,
             name: undefined,
             email: undefined,
-            group: undefined,
+            group: 'teacher',
             password: undefined,
             confirm: undefined,
             created_by: undefined,
