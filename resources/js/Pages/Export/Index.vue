@@ -49,7 +49,7 @@ const questionTypes = [
     { title: 'Match', value: 'match' },
     { title: 'Short Answer', value: 'short_answer' },
     { title: 'Detail', value: 'detail' },
-    // { title: 'Image Question', value: 'image_question' }
+    { title: 'Image Question', value: 'image_question' }
 ]
 
 const questions = ref([

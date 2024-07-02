@@ -55,10 +55,12 @@
       @endphp
       <div>
         <div class="mb-1 border-b">
-          @if($item['questionType'] != 'match' && $item['questionType'] != 'image_question')
-            <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $item['heading'] }}</strong></p>
-          @else
+          @if($item['questionType'] == 'match')
             <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $filteredQuestions['question'] }}</strong></p>
+          @elseif($item['questionType'] == 'image_question')
+            <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $filteredQuestions[0]['question'] }}</strong></p>
+          @else
+            <p class="text-subtitle-1 float-left" style="font: bold"><strong><span>{{ $loop->iteration }}. </span>{{ $item['heading'] }}</strong></p>
           @endif
           <p class="text-subtitle-1 ms-auto float-right"><strong>Marks: {{ $item['marks'] }}</strong></p>
           <div style="clear:both"></div>
@@ -75,9 +77,7 @@
                   {{ $question['question'] }} (  )
                 </li>
               @elseif ($question['type'] == 'image_question')
-                <li>
-                  <img src="{{public_path($question['option'])}}" alt="">
-                </li>
+                <img src="{{public_path('/storage/'.$question['option'])}}" alt="" width="400">
               @elseif ($question['type'] == 'choose')
                 <li>
                   <p>{{ $question['question'] }}</p>
