@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->longText('image');
-            $table->string('group');
+            $table->longText('image')->nullable();
+            $table->string('group')->default('teacher');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
