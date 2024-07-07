@@ -14,7 +14,7 @@ const props = defineProps({
 const { formatDate } = useFormatDate()
 </script>
 <template>
-    <VCard :title="props.UserData?.name" color="orange" variant="outlined">
+    <VCard :title="props.UserData?.name" color="purple-darken-4" variant="outlined">
         <template #append>
             <Link href="/users" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">

@@ -31,19 +31,19 @@ const removeField = (index) => {
             <VTable class="text-no-wrap w-100">
                 <thead>
                     <tr>
-                        <th style="width: 300px;">
+                        <th style="width: 300px;color: #4A148C">
                             Question Type
                         </th>
-                        <th>
+                        <th style="color: #4A148C">
                             Heading
                         </th>
-                        <th style="width: 100px;">
+                        <th style="width: 100px;color: #4A148C">
                             No Of Questions
                         </th>
-                        <th style="width: 100px;">
+                        <th style="width: 100px;color: #4A148C">
                             Marks
                         </th>
-                        <th style="width: 80px;">
+                        <th style="width: 80px;color: #4A148C">
                             Action
                         </th>
                     </tr>
@@ -56,6 +56,7 @@ const removeField = (index) => {
                                 :items="props.questionTypes"
                                 variant="outlined"
                                 v-model="question.questionType"
+                                style="color: #4A148C"
                             />
                         </td>
                         <td class="pa-2">
@@ -64,6 +65,7 @@ const removeField = (index) => {
                                 label="Heading"
                                 variant="outlined"
                                 v-model="question.heading"
+                                style="color: #4A148C"
                             />
                         </td>
                         <td class="pa-2">
@@ -73,6 +75,7 @@ const removeField = (index) => {
                                 label="No of Questions"
                                 variant="outlined"
                                 v-model="question.no_of_questions"
+                                style="color: #4A148C"
                             />
                         </td>
                         <td class="pa-2">
@@ -80,6 +83,7 @@ const removeField = (index) => {
                                 label="Marks"
                                 variant="outlined"
                                 v-model="question.marks"
+                                style="color: #4A148C"
                             />
                         </td>
                         <td class="pa-2">

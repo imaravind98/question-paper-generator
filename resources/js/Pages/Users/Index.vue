@@ -78,7 +78,7 @@ const changePageSize = (pageSize) => {
 
 </script>
 <template>
-    <VCard title="User" color="orange" variant="outlined">
+    <VCard title="User" color="purple-darken-4" variant="outlined">
         <template #append>
             <div class="d-flex justify-center align-end ga-3">
                 <VTextField 

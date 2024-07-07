@@ -13,7 +13,7 @@ const props = defineProps({
 const { formatDate } = useFormatDate()
 </script>
 <template>
-    <VCard :title="props.question?.name" color="orange" variant="outlined">
+    <VCard :title="props.question?.name" color="purple-darken-4" variant="outlined">
         <template #append>
             <Link href="/questions" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">

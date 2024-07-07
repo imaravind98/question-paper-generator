@@ -43,11 +43,12 @@ const filteredChapters = computed(function(){
 })
 
 const questionTypes = [
-    { title: 'One Word', value: 'one_word' },
-    { title: 'Choose', value: 'choose' },
+    { title: 'Fill Ups', value: 'one_word' },
+    { title: 'MCQ', value: 'choose' },
     { title: 'True Or False', value: 'true_or_false' },
     { title: 'Match', value: 'match' },
     { title: 'Short Answer', value: 'short_answer' },
+    { title: 'Random Question', value: 'random_question' },
     { title: 'Detail', value: 'detail' },
     { title: 'Image Question', value: 'image_question' }
 ]
@@ -102,7 +103,7 @@ const submit = async () => {
 
 </script>
 <template>
-    <VCard title="Export" color="orange" variant="outlined">
+    <VCard title="Export" color="purple-darken-4" variant="outlined">
         <VCardText>
             <VForm @submit.prevent="() => { submit() }">
                 <VRow>

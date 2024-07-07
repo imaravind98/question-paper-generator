@@ -20,7 +20,7 @@ const logout = () => {
             <v-col
               cols="12"
             >
-              <VCard class="mb-5" color="orange-lighten-3">
+              <VCard class="mb-5" color="purple-darken-4">
                 <template #append>
                   <VBtn
                     color="primary"

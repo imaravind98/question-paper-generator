@@ -74,7 +74,7 @@ const updateModelValue = (event) => {
 </script>
 <template>
     <VDialog width="700" :model-value="model" @update:model-value="($event) => { updateModelValue($event) }">
-        <vCard :title="store.user.id ? 'Edit user' : 'Add user'" class="text-center" color="orange-lighten-5">
+        <vCard :title="store.user.id ? 'Edit user' : 'Add user'" class="text-center" color="purple-lighten-5">
             <v-card-text>
                 <VForm @submit.prevent="() => { submit() }">
                     <VRow>

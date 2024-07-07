@@ -20,7 +20,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <VCard title="Login" class="text-center" color="orange" variant="tonal">
+  <VCard title="Login" class="text-center" color="purple-darken-4" variant="tonal">
     <VCardText>
       <VForm @submit.prevent="() => { submit() }">
         <VRow>

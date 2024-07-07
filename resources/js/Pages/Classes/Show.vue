@@ -14,7 +14,7 @@ const props = defineProps({
 const { formatDate } = useFormatDate()
 </script>
 <template>
-    <VCard :title="props.classData?.name" color="orange" variant="outlined">
+    <VCard :title="props.classData?.name" color="purple-darken-4" variant="outlined">
         <template #append>
             <Link href="/classes" as="button" type="button">
                 <VBtn color="primary" prepend-icon="mdi-arrow-left">

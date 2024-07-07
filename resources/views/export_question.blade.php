@@ -68,11 +68,7 @@
         @if($item['questionType'] != 'match')
           <ol type="A" class="ml-8 mb-2 text-subtitle-2 font-weight-regular">
             @foreach($filteredQuestions as $question)
-              @if ($question['type'] == 'one_word' | $question['type'] == 'short_answer' | $question['type'] == 'detail')
-                <li>
-                  {{ $question['question'] }}
-                </li>
-              @elseif ($question['type'] == 'true_or_false')
+              @if ($question['type'] == 'true_or_false')
                 <li>
                   {{ $question['question'] }} (  )
                 </li>
@@ -91,6 +87,10 @@
                       <td class="w-50">D. {{ $question['option'][3]['value'] }}</td>
                     </tr>
                   </table>
+                </li>
+              @else ($question['type'] == 'one_word' | $question['type'] == 'short_answer' | $question['type'] == 'detail')
+                <li>
+                  {{ $question['question'] }}
                 </li>
               @endif
             @endforeach

@@ -83,11 +83,12 @@ const updateModelValue = (event) => {
 }
 
 const quetionType = [
-    { title: 'One Word', value: 'one_word' },
-    { title: 'Choose', value: 'choose' },
+    { title: 'Fill Ups', value: 'one_word' },
+    { title: 'MCQ', value: 'choose' },
     { title: 'True Or False', value: 'true_or_false' },
     { title: 'Match', value: 'match' },
     { title: 'Short Answer', value: 'short_answer' },
+    { title: 'Random Question', value: 'random_question' },
     { title: 'Detail', value: 'detail' },
     { title: 'Image Question', value: 'image_question' }
 ]
@@ -111,7 +112,7 @@ const chapters = computed(function(){
 </script>
 <template>
     <VDialog width="900" :model-value="model" @update:model-value="($event) => { updateModelValue($event) }">
-        <vCard :title="store.question.id ? 'Edit question' : 'Add question'" class="text-center" color="orange-lighten-5">
+        <vCard :title="store.question.id ? 'Edit question' : 'Add question'" class="text-center" color="purple-lighten-5">
             <v-card-text>
                 <VForm @submit.prevent="() => { submit() }">
                     <VRow>
