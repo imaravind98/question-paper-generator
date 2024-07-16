@@ -29,6 +29,8 @@ services:
       SERVICE_NAME: mysql
     ports: 
     - 3306:3306
+    volumes:
+      - ./docker-compose/mysql:/var/lib/mysql
     networks:
       - question_paper_generator
 

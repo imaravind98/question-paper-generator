@@ -9,11 +9,11 @@
     <header class="mb-5">
       <table class="w-100">
         <tr>
-          <td style="border: 1px solid black; vertical-align: top;width:80px">
+          <td style="border: 1px solid black; vertical-align: top;width:80px;padding:10px">
             <img src="{{public_path('assets/logo.png')}}" alt="" width="100">
           </td>
           <td style="border: 1px solid black;vertical-align: top"> 
-            <h2 class="text-center">Shashwat Public</h2>
+            <h2 class="text-center">Shashwat Public School</h2>
             <p class="text-center text-capitalize font-weight-bold">({{ $testName }})</p>
             <table class="w-100">
               <thead>
